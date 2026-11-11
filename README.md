@@ -13,10 +13,10 @@ In SWIPT, one signal carries both data and energy. Rectifier circuits are non-li
 
 | Task | Description | Figures |
 |---|---|---|
-| **1. PAPR vs. $d_{min}$** | Closed-form PAPR and $d_{min}$ for 16-PSK, PAM, QAM and Circular QAM (CQAM, N = 4 and 8), verified with simulation | [PAPR_dmin](plots/task1_papr_vs_dmin/PAPR_dmin.pdf) |
-| **2i. SER vs. harvested energy** | SER as harvested energy grows at high SNR, including spike QAM (sQAM) from [R2] | [SER_energy](plots/task2_ser_analysis/SER_energy.pdf) |
-| **2ii. SER vs. SNR** | Analytical SER under AWGN with and without energy harvesting, using ML decision regions and the Q-function | [SER_SNR](plots/task2_ser_analysis/SER_SNR.pdf) |
-| **3. Proposed constellation** | A new 16-QAM: 5 circles of 3 symbols each, plus one high-energy "spike" symbol | [QAM_16_NEW](plots/task3_proposed_constellation/QAM_16_NEW.pdf), [PAPR_dmin_NEW](plots/task3_proposed_constellation/PAPR_dmin_NEW.pdf) |
+| **1. PAPR vs. $d_{min}$** | Closed-form PAPR and $d_{min}$ for 16-PSK, PAM, QAM and Circular QAM (CQAM, N = 4 and 8), verified with simulation | [PAPR_dmin](plots/task1/PAPR_dmin.pdf) |
+| **2i. SER vs. harvested energy** | SER as harvested energy grows at high SNR, including spike QAM (sQAM) from [R2] | [SER_energy](plots/task2/SER_energy.pdf) |
+| **2ii. SER vs. SNR** | Analytical SER under AWGN with and without energy harvesting, using ML decision regions and the Q-function | [SER_SNR](plots/task2/SER_SNR.pdf) |
+| **3. Proposed constellation** | A new 16-QAM: 5 circles of 3 symbols each, plus one high-energy "spike" symbol | [QAM_16_NEW](plots/task3/QAM_16_NEW.pdf), [PAPR_dmin_NEW](plots/task3/PAPR_dmin_NEW.pdf) |
 
 ## Key findings
 
@@ -30,13 +30,11 @@ All derivations and discussion are in the full report (in Greek): [`docs/Εργ�
 
 ```
 docs/     report and original assignment
-src/      MATLAB scripts, one folder per task (each script draws one figure)
-plots/    generated figures (PDF), same layout as src/
+src/      MATLAB scripts
+plots/    generated figures
 ```
 
 ## Running the code
-
-Open any script in `src/` in MATLAB and run it. To export a figure, uncomment the `saveas(...)` line at the end of the script.
 
 The scripts need the **Communications Toolbox** (`qfunc`) and the **Image Processing Toolbox** (`viscircles`).
 
