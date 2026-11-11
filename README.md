@@ -1,7 +1,6 @@
 # Constellation Design for SWIPT
 
-Research project on modulation design for **Simultaneous Wireless Information and Power Transfer (SWIPT)**.
-Course: *Telecommunication Systems II*, ECE, Aristotle University of Thessaloniki (2024).
+This repository contains the research project on modulation design for **Simultaneous Wireless Information and Power Transfer (SWIPT)** for the **Telecommunication Systems II** course at ECE AUTH during the 2023-2024 academic year.
 
 **Team 22:** Georgios Lavdakis · Alexandros Pagkaltzis
 
@@ -20,7 +19,7 @@ In SWIPT, one signal carries both data and energy. Rectifier circuits are non-li
 
 ## Key findings
 
-- **CQAM** gives a better PAPR/$d_{min}$ trade-off than PSK, PAM and QAM. Its number of energy levels lets you choose between energy harvesting and reliability.
+- **CQAM** gives a better PAPR/$`d_{min}`$ trade-off than PSK, PAM and QAM. Its number of energy levels lets you choose between energy harvesting and reliability.
 - With energy harvesting ($\varepsilon(x) = 0.2$), the SER of PAM and QAM stops falling as SNR rises, while CQAM's SER keeps dropping.
 - **Our proposed constellation** reaches PAPR up to 16, four times CQAM with N = 4, following $\text{PAPR} = 16 - 46.32\,d_{min}^2$ for $d_{min} \le 0.533$. It offers 5 energy levels for fine control of the harvested energy.
 
@@ -34,7 +33,7 @@ src/      MATLAB scripts
 plots/    generated figures
 ```
 
-## Running the code
+## Requirements
 
 The scripts need the **Communications Toolbox** (`qfunc`) and the **Image Processing Toolbox** (`viscircles`).
 
