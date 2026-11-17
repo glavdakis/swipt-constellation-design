@@ -23,7 +23,7 @@ In SWIPT, one signal carries both data and energy. Rectifier circuits are non-li
 - With energy harvesting ($\varepsilon(x) = 0.2$), the SER of PAM and QAM stops falling as SNR rises, while CQAM's SER keeps dropping.
 - **Our proposed constellation** reaches PAPR up to 16, four times CQAM with N = 4, following $\text{PAPR} = 16 - 46.32\,d_{min}^2$ for $d_{min} \le 0.533$. It offers 5 energy levels for fine control of the harvested energy.
 
-All derivations and discussion are in the full report (in Greek): [`docs/Εργασία_έρευνας.pdf`](docs/Εργασία_έρευνας.pdf).
+All derivations and discussion are in the full report (in Greek): [`docs/Εργασία_έρευνας.pdf`](docs/report.pdf).
 
 ## Repository structure
 
