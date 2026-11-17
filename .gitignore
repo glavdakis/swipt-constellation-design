@@ -1,2 +1,9 @@
 references/
 ergasia_erevnas_template/
+
+*.tex
+*.aux
+*.log
+*.toc
+*.bcf
+*.run.xml
