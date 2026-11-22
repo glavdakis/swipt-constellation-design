@@ -7,31 +7,32 @@ set(groot,'defaultAxesFontSize',11);
 M=16;
 
 %% theory
+h=gobjects(1,5);
 %16-PSK
 dmin_i=0.3902;
 PAPR_i=1;
-scatter(dmin_i,PAPR_i,"filled","g","square")
+h(1)=scatter(dmin_i,PAPR_i,"filled","g","square");
 hold on
 
 %16-PAM
 dmin_ii=0.2169;
 PAPR_ii=2.647;
-scatter(dmin_ii,PAPR_ii,"filled","b","^")
+h(2)=scatter(dmin_ii,PAPR_ii,"filled","b","^");
 
 %16-QAM
 dmin_iii=0.63246;
 PAPR_iii=1.8;
-scatter(dmin_iii,PAPR_iii,"filled","m","o")
+h(3)=scatter(dmin_iii,PAPR_iii,"filled","m","o");
 
 %16-CQAM, N=4
 dmin_iv=linspace(0,sqrt(2/(3+sqrt(3))),200);
 PAPR_iv=4-(3.5+sqrt(3))*dmin_iv.^2;
-plot(dmin_iv,PAPR_iv,"r")
+h(4)=plot(dmin_iv,PAPR_iv,"r");
 
 %16-CQAM, N=8
 dmin_v=linspace(0,2/3,200);
 PAPR_v=8-13.25*dmin_v.^2;
-plot(dmin_v,PAPR_v,"c")
+h(5)=plot(dmin_v,PAPR_v,"c");
 
 %% simulation: build every constellation numerically and measure PAPR and dmin
 %16-PSK, 16-PAM, 16-QAM
@@ -39,27 +40,35 @@ x_psk=exp(1j*2*pi*(0:M-1)'/M);
 x_pam=(2*(1:M)'-M-1);
 [I,Q]=meshgrid(-3:2:3);
 x_qam=I(:)+1j*Q(:);
-sim=[measure(x_psk); measure(x_pam); measure(x_qam)];
+sim=measure(x_psk);
+plot(sim(1),sim(2),'go','MarkerSize',9,'LineWidth',1);
+sim=measure(x_pam);
+plot(sim(1),sim(2),'bo','MarkerSize',9,'LineWidth',1);
+sim=measure(x_qam);
+plot(sim(1),sim(2),'mo','MarkerSize',9,'LineWidth',1);
 
 %16-CQAM: R1's Algorithm 1 run numerically, with the phase of every circle
 %chosen to give the smallest radius
+colors=struct('N4','r','N8','c');
 for N=[4 8]
     n=M/N;
+    sim=[];
     for d=0.05:0.05:0.65
         x=cqam_alg1(N,n,d,M);
         if ~isempty(x)
             sim=[sim; measure(x)];
         end
     end
+    plot(sim(:,1),sim(:,2),'o','Color',colors.(sprintf('N%d',N)),'MarkerSize',6,'LineWidth',1);
 end
-h=plot(sim(:,1),sim(:,2),'kx','MarkerSize',7,'LineWidth',1);
+hs=plot(nan,nan,'ko','MarkerSize',6,'LineWidth',1); %legend entry for the simulation markers
 
 xlim([0 0.7])
 ylim([0 8])
 xlabel('$d_{\min}$');
 ylabel('PAPR');
 title('PAPR versus $d_{\min}$');
-legend({'16-PSK','16-PAM','16-QAM','16-CQAM, $N=4$','16-CQAM, $N=8$','simulation'},...
+legend([h hs],{'16-PSK','16-PAM','16-QAM','16-CQAM, $N=4$','16-CQAM, $N=8$','simulation'},...
     'Location','northeast');
 grid on;
 hold off
