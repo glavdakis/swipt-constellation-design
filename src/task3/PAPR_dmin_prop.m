@@ -42,4 +42,4 @@ legend({'Proposed 16-point constellation','16-CQAM, $N=4$','16-CQAM, $N=8$',...
 grid on;
 hold off
 
-%exportgraphics(gcf,'PAPR_dmin_NEW.pdf','ContentType','vector');
+%exportgraphics(gcf,'PAPR_dmin_prop.pdf','ContentType','vector');

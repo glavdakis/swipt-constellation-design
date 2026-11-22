@@ -41,4 +41,4 @@ title('Proposed 16-point constellation, $d_{\min}=0.6$');
 xlabel('In-phase');
 ylabel('Quadrature');
 
-%exportgraphics(gcf,'QAM_16_OPT.pdf','ContentType','vector');
+%exportgraphics(gcf,'QAM_16_prop.pdf','ContentType','vector');
