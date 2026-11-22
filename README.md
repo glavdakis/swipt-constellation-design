@@ -49,7 +49,7 @@ plots/    generated figures
 
 ## Requirements
 
-`SER_SNR.m` needs the **Communications Toolbox** (`qfunc`). All other scripts run on base MATLAB.
+The scripts need the **Communications Toolbox** (`qfunc`)
 
 ## References
 
