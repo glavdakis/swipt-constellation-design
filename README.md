@@ -13,8 +13,8 @@ In SWIPT, one signal carries both data and energy. Rectifier circuits are non-li
 | Task | Description | Figures |
 |---|---|---|
 | **1. PAPR vs. $d_{min}$** | Closed-form PAPR and $d_{min}$ for 16-PSK, PAM, QAM and Circular QAM (CQAM, N = 4 and 8), verified by building every constellation numerically and measuring PAPR and $d_{min}$ | [PAPR_dmin](plots/task1/PAPR_dmin.pdf) |
-| **2i. SER vs. harvested energy** | SER as harvested energy grows at high SNR, including spike QAM (sQAM) from [R2], verified with Monte Carlo simulation | [SER_energy](plots/task2/SER_energy.pdf) |
-| **2ii. SER vs. SNR** | Analytical SER under AWGN with and without energy harvesting (including sQAM), using ML decision regions, the union bound and the Q-function, verified with Monte Carlo simulation | [SER_SNR](plots/task2/SER_SNR.pdf) |
+| **2a. SER vs. harvested energy** | SER as harvested energy grows at high SNR, including spike QAM (sQAM) from [R2], verified with Monte Carlo simulation | [SER_energy](plots/task2/SER_energy.pdf) |
+| **2b. SER vs. SNR** | Analytical SER under AWGN with and without energy harvesting (including sQAM), using ML decision regions, the union bound and the Q-function, verified with Monte Carlo simulation | [SER_SNR](plots/task2/SER_SNR.pdf) |
 | **3. Proposed constellation** | An upper bound on the PAPR of any 16-point constellation, and the constellation that reaches it: 15 symbols on a hexagonal lattice around their centroid plus one high-energy "spike" symbol | [QAM_16_OPT](plots/task3/QAM_16_OPT.pdf), [PAPR_dmin_NEW](plots/task3/PAPR_dmin_NEW.pdf) |
 
 ## Key findings
