@@ -16,35 +16,30 @@ cqam_points = [];
 
 %print symbols
 for i = 1:N
-    theta = linspace(0, 2*pi, n+1);
+    theta = (0:n-1)*2*pi/n; %n symbols, equally spaced
     theta = theta + phaseOffsets(i); 
     circle_points = radii(i).*exp(1j * theta);
     cqam_points = [cqam_points; circle_points.']; 
 end
 
 figure;
-xlim([-3 3])
-ylim([-3 3])
+xlim([-2.5 2.5])
+ylim([-2.5 2.5])
 grid on;
 title('16-CQAM, $N=4$, max PAPR ($d_{\min}=0$)');
 xlabel('In-phase');
 ylabel('Quadrature');
 axis square;
 
-%print R_{1} circle
-center = [0, 0]; 
-viscircles(center, radii(1),'Color','b'); 
+blue=[0 0.447 0.741]; %MATLAB default blue, as in [R1]
+t=linspace(0,2*pi,400);
 hold on
-
-%print R_{2} to R_{N-1}  circle
-for i = 2:N-1
-  viscircles(center, radii(i),'Color','b'); 
+%circles R_1,...,R_{N-1} in blue and R_N in red
+for i = 1:N-1
+    plot(radii(i)*cos(t), radii(i)*sin(t), 'Color', blue);
 end
-
-%print R_{N} circle
-viscircles(center, radii(4),'Color','r');
-
-plot(real(cqam_points), imag(cqam_points), 'o','MarkerFaceColor','b');
+plot(radii(N)*cos(t), radii(N)*sin(t), 'r');
+plot(real(cqam_points), imag(cqam_points), 'o', 'Color', blue);
 hold off
 
 %exportgraphics(gcf,'CQAM_16_N4_PAPR.pdf','ContentType','vector');

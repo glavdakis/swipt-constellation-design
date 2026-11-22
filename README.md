@@ -49,7 +49,7 @@ plots/    generated figures
 
 ## Requirements
 
-The scripts need the **Communications Toolbox** (`qfunc`) and the **Image Processing Toolbox** (`viscircles`).
+The SER scripts (`SER_SNR.m`) need the **Communications Toolbox** (`qfunc`). All other scripts run on base MATLAB.
 
 ## References
 

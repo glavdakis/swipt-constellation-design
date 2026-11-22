@@ -6,13 +6,18 @@ set(groot,'defaultAxesFontSize',11);
 
 M=16;
 Es=1;
-i=linspace(1,M+1,17);
+i=1:M;
 theta =(i-1)*2*pi/M;
-I=Es*cos(theta);
-Q=Es*sin(theta);
+I=sqrt(Es)*cos(theta);
+Q=sqrt(Es)*sin(theta);
 
 figure;
-plot(I,Q,'-x');
+hold on
+%the only energy level (also the outer one): red circle, as in [R1]
+t=linspace(0,2*pi,400);
+plot(sqrt(Es)*cos(t),sqrt(Es)*sin(t),'r');
+plot(I,Q,'o','Color',[0 0.447 0.741]);
+hold off
 grid on;
 axis square;
 xlim([-2 2])

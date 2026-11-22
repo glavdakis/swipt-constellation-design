@@ -5,17 +5,14 @@ set(groot,'defaultLegendInterpreter','latex');
 set(groot,'defaultAxesFontSize',11);
 
 M = 16;
-Eg=0.01176;
+Eg=3/(M^2-1);
 i=linspace(1,M,16);
 x=(2*i-M-1)*sqrt(Eg);
-y=0;
+y=zeros(size(x));
 
 figure;
-plot(x,y,"x");
+plot(x,y,'o','Color',[0 0.447 0.741]);
 axis square;
-mycolors = [0 0 1];
-ax = gca; 
-ax.ColorOrder = mycolors;
 grid on;
 xlim([-2 2])
 ylim([-2 2])

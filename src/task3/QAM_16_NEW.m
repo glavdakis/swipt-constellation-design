@@ -16,37 +16,32 @@ qam_points = [];
 
 %print symbols
 for i = 1:N
-    theta = linspace(0, 2*pi, n+1);
+    theta = (0:n-1)*2*pi/n; %n symbols, equally spaced
     theta = theta + phaseOffsets(i); 
     circle_points = radii(i).*exp(1j * theta);
     qam_points = [qam_points; circle_points.']; 
 end
 
 figure;
-xlim([-3 3])
-ylim([-3 3])
+xlim([-2 2])
+ylim([-2 2])
 grid on;
 title('Proposed 16-QAM, $N=5$, $d_{\min}=0.53$');
 xlabel('In-phase');
 ylabel('Quadrature');
 axis square;
 
-%print R_{1} circle
-center = [0, 0]; 
-viscircles(center, radii(1),'Color','b'); 
+blue=[0 0.447 0.741]; %MATLAB default blue, as in [R1]
+t=linspace(0,2*pi,400);
 hold on
-
-%print R_{2} to R_{N-1}  circle
-for i = 2:N
-   center = [0, 0]; 
-   viscircles(center, radii(i),'Color','b'); 
+%circles R_1,...,R_N in blue
+for i = 1:N
+    plot(radii(i)*cos(t), radii(i)*sin(t), 'Color', blue);
 end
-
-%extra symbol
+%extra symbol s_16 on the outer energy level (red circle)
 x=sqrt(16-3*c*dmin.^2);
-scatter(x,0,'red',"filled")
-
-plot(real(qam_points), imag(qam_points), 'o','MarkerFaceColor','b');
+plot(x*cos(t), x*sin(t), 'r');
+plot([real(qam_points); x], [imag(qam_points); 0], 'o', 'Color', blue);
 hold off
 
 %exportgraphics(gcf,'QAM_16_NEW.pdf','ContentType','vector');
