@@ -4,11 +4,12 @@ set(groot,'defaultAxesTickLabelInterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 set(groot,'defaultAxesFontSize',11);
 
-%16-QAM
-c=15.44016936;
-dmin_i=linspace(0,0.5332255829,200);
-PAPR_i=16-3*c*dmin_i.^2;
-plot(dmin_i,PAPR_i,"g")
+%proposed 16-point constellation: 15 hexagonal-lattice points around their
+%centroid + 1 spike; it reaches the upper bound PAPR <= 16 - S15*dmin^2
+figure('Position',[100 100 560 560]);
+dmin_i=linspace(0,15/(4*sqrt(31)),200);
+PAPR_i=16-(464/15)*dmin_i.^2;
+plot(dmin_i,PAPR_i,"k","LineWidth",1.2)
 hold on
 
 %16-CQAM, N=4
@@ -31,15 +32,14 @@ dmin_v=linspace(0,0.63246,200);
 PAPR_v=16-35.5*dmin_v.^2;
 plot(dmin_v,PAPR_v,"m")
 
-
 xlim([0 0.7])
 ylim([0 17])
 xlabel('$d_{\min}$');
 ylabel('PAPR');
 title('PAPR versus $d_{\min}$');
-legend({'Proposed 16-QAM, $N=5$','16-CQAM, $N=4$','16-CQAM, $N=8$',...
-    '16-sQAM, $i=4$','16-sQAM, $i=1$'},'Location','northeast');
+legend({'Proposed 16-point constellation','16-CQAM, $N=4$','16-CQAM, $N=8$',...
+    '16-sQAM, $i=4$','16-sQAM, $i=1$'},'Location','southoutside','NumColumns',2);
 grid on;
 hold off
-   
+
 %exportgraphics(gcf,'PAPR_dmin_NEW.pdf','ContentType','vector');

@@ -15,13 +15,13 @@ In SWIPT, one signal carries both data and energy. Rectifier circuits are non-li
 | **1. PAPR vs. $d_{min}$** | Closed-form PAPR and $d_{min}$ for 16-PSK, PAM, QAM and Circular QAM (CQAM, N = 4 and 8), verified by building every constellation numerically and measuring PAPR and $d_{min}$ | [PAPR_dmin](plots/task1/PAPR_dmin.pdf) |
 | **2i. SER vs. harvested energy** | SER as harvested energy grows at high SNR, including spike QAM (sQAM) from [R2], verified with Monte Carlo simulation | [SER_energy](plots/task2/SER_energy.pdf) |
 | **2ii. SER vs. SNR** | Analytical SER under AWGN with and without energy harvesting (including sQAM), using ML decision regions, the union bound and the Q-function, verified with Monte Carlo simulation | [SER_SNR](plots/task2/SER_SNR.pdf) |
-| **3. Proposed constellation** | A new 16-QAM: 5 circles of 3 symbols each, plus one high-energy "spike" symbol | [QAM_16_NEW](plots/task3/QAM_16_NEW.pdf), [PAPR_dmin_NEW](plots/task3/PAPR_dmin_NEW.pdf) |
+| **3. Proposed constellation** | An upper bound on the PAPR of any 16-point constellation, and the constellation that reaches it: 15 symbols on a hexagonal lattice around their centroid plus one high-energy "spike" symbol | [QAM_16_OPT](plots/task3/QAM_16_OPT.pdf), [PAPR_dmin_NEW](plots/task3/PAPR_dmin_NEW.pdf) |
 
 ## Key findings
 
 - **CQAM** gives a better PAPR/$`d_{min}`$ trade-off than PSK, PAM and QAM. Its number of energy levels lets you choose between energy harvesting and reliability. Each circle is placed at the smallest radius that keeps every distance at least $d_{min}$, with its phase chosen to make that radius as small as possible (R1's Algorithm 1). With N = 4 this gives $\text{PAPR} = 4 - (3.5+\sqrt{3})\,d_{min}^2$ up to $d_{min} = 0.650$, above the 0.632 of 16-QAM with almost the same PAPR (1.79 vs 1.8). With N = 8 all symbols lie on a hexagonal lattice and $\text{PAPR} = 8 - 13.25\,d_{min}^2$ up to $d_{min} = 2/3$.
 - When the same energy ($\varepsilon(x) = 0.2$) is harvested from every symbol, PAM, QAM and sQAM reach the same error floor, SER = 3/16: each has 4 symbols with energy of at most 0.2, which collapse to the origin and can no longer be told apart. CQAM (N = 4) has no error floor, because its inner circle keeps energy 0.211 > 0.2, and reaches SER = 10⁻⁵ at 25.7 dB.
-- **Our proposed constellation** reaches PAPR up to 16, four times CQAM with N = 4, following $\text{PAPR} = 16 - 46.32\,d_{min}^2$ for $d_{min} \le 0.533$. It offers 5 energy levels for fine control of the harvested energy.
+- **Our proposed constellation:** for any 16-point constellation, $\text{PAPR} \le 16 - S_{15}\,d_{min}^2$, where $S_{15}$ is the smallest total energy of 15 points at least $d_{min}$ apart. The bound is reached by 15 symbols on the hexagonal lattice around their centroid ($S_{15} = 464/15 \approx 30.93$) plus one spike, giving $\text{PAPR} = 16 - 30.93\,d_{min}^2$ up to $d_{min} = 0.674$: the highest PAPR of all the constellations studied, for every $d_{min}$. A numerical search over arbitrary placements of the 15 points found nothing better. It beats sQAM with one spike from [R2] (same structure, but on a square grid with $S_{15} = 35.5$), and every symbol has its own energy level.
 
 All derivations and discussion are in the full report: [`docs/report.pdf`](docs/report.pdf).
 
@@ -49,7 +49,7 @@ plots/    generated figures
 
 ## Requirements
 
-The SER scripts (`SER_SNR.m`) need the **Communications Toolbox** (`qfunc`). All other scripts run on base MATLAB.
+`SER_SNR.m` needs the **Communications Toolbox** (`qfunc`). All other scripts run on base MATLAB.
 
 ## References
 
