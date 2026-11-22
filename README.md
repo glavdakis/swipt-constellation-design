@@ -14,16 +14,16 @@ In SWIPT, one signal carries both data and energy. Rectifier circuits are non-li
 |---|---|---|
 | **1. PAPR vs. $d_{min}$** | Closed-form PAPR and $d_{min}$ for 16-PSK, PAM, QAM and Circular QAM (CQAM, N = 4 and 8), verified with simulation | [PAPR_dmin](plots/task1/PAPR_dmin.pdf) |
 | **2i. SER vs. harvested energy** | SER as harvested energy grows at high SNR, including spike QAM (sQAM) from [R2] | [SER_energy](plots/task2/SER_energy.pdf) |
-| **2ii. SER vs. SNR** | Analytical SER under AWGN with and without energy harvesting, using ML decision regions and the Q-function | [SER_SNR](plots/task2/SER_SNR.pdf) |
+| **2ii. SER vs. SNR** | Analytical SER under AWGN with and without energy harvesting, using ML decision regions, the union bound and the Q-function, checked with Monte Carlo simulation | [SER_SNR](plots/task2/SER_SNR.pdf) |
 | **3. Proposed constellation** | A new 16-QAM: 5 circles of 3 symbols each, plus one high-energy "spike" symbol | [QAM_16_NEW](plots/task3/QAM_16_NEW.pdf), [PAPR_dmin_NEW](plots/task3/PAPR_dmin_NEW.pdf) |
 
 ## Key findings
 
-- **CQAM** gives a better PAPR/$`d_{min}`$ trade-off than PSK, PAM and QAM. Its number of energy levels lets you choose between energy harvesting and reliability.
-- With energy harvesting ($\varepsilon(x) = 0.2$), the SER of PAM and QAM stops falling as SNR rises, while CQAM's SER keeps dropping.
+- **CQAM** gives a better PAPR/$`d_{min}`$ trade-off than PSK, PAM and QAM. Its number of energy levels lets you choose between energy harvesting and reliability. With N = 4 it reaches $d_{min} = 0.606$, close to the 0.632 of 16-QAM, and its SER without energy harvesting is almost the same as that of 16-QAM.
+- When the same energy ($\varepsilon(x) = 0.2$) is harvested from every symbol, PAM, QAM and CQAM all reach the same error floor, SER = 3/16. Each has 4 symbols with energy of at most 0.2, which collapse to the origin and can no longer be told apart. CQAM's advantage for energy harvesting shows in the SER versus harvested energy analysis: the choice of $d_{min}$ or of maximum PAPR moves its energy levels.
 - **Our proposed constellation** reaches PAPR up to 16, four times CQAM with N = 4, following $\text{PAPR} = 16 - 46.32\,d_{min}^2$ for $d_{min} \le 0.533$. It offers 5 energy levels for fine control of the harvested energy.
 
-All derivations and discussion are in the full report (in Greek): [`docs/report.pdf`](docs/report.pdf).
+All derivations and discussion are in the full report: [`docs/report.pdf`](docs/report.pdf).
 
 ## Repository structure
 

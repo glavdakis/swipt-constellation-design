@@ -1,3 +1,9 @@
+%plot style: all text with the LaTeX interpreter (Computer Modern, as in the report)
+set(groot,'defaultTextInterpreter','latex');
+set(groot,'defaultAxesTickLabelInterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+set(groot,'defaultAxesFontSize',11);
+
 N=5;  
 M=16;
 n=3;
@@ -17,10 +23,10 @@ for i = 1:N
 end
 
 figure;
-xlim([-4.5 4.5])
-ylim([-4.5 4.5])
+xlim([-3 3])
+ylim([-3 3])
 grid on;
-title('16-QAM, N=5, d_{min}=0.53');
+title('Proposed 16-QAM, $N=5$, $d_{\min}=0.53$');
 xlabel('In-phase');
 ylabel('Quadrature');
 axis square;
@@ -37,7 +43,7 @@ for i = 2:N
 end
 
 %extra symbol
-x=16-3*c*dmin.^2;
+x=sqrt(16-3*c*dmin.^2);
 scatter(x,0,'red',"filled")
 
 plot(real(qam_points), imag(qam_points), 'o','MarkerFaceColor','b');

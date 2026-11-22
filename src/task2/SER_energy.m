@@ -1,3 +1,9 @@
+%plot style: all text with the LaTeX interpreter (Computer Modern, as in the report)
+set(groot,'defaultTextInterpreter','latex');
+set(groot,'defaultAxesTickLabelInterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+set(groot,'defaultAxesFontSize',11);
+
 Es=1;
 M=16;
 
@@ -22,9 +28,9 @@ hold on
 
 %16-QAM
 %energy levels for QAM
-e_q1=0.2048;
-e_q2=1.024;
-e_q4=1.8432;
+e_q1=0.2;
+e_q2=1;
+e_q4=1.8;
 e_qam=[e_q1, e_q1, e_q2, e_q2, e_q4, e_q4, 4, 4.2]; %range of ε(x)
 SER_qam=[0, 0.25,0.25, 0.75, 0.75, 1, 1, 1]; %values of SER
 
@@ -32,7 +38,7 @@ plot(e_qam, SER_qam, 'k--', 'LineWidth', 1);
 
 
 %16-CQAM, max dmin
-dmin_i=0.62772;
+dmin_i=0.60639;
 %energy levels for CQAM, max dmin
 e_d1=(dmin_i^2)/2;
 e_d2=(dmin_i^2)*((1+sqrt(3))/2)^2;
@@ -64,11 +70,11 @@ plot(e_sqam, SER_sqam, 'g--', 'LineWidth', 1);
 
 xlim([0 4.2])
 ylim([0 1])
-xlabel('harvested energy ε(x)')
-ylabel('SER')
-title('SER versus ε(x)')
-legend({'PAM, M=16','QAM, M=16', 'CQAM, M=16, N=4, max d_{min}',...
-    'CQAM, M=16, N=4, max PAPR','sQAM, M=16, i=4'}, 'Location','southeast')
+xlabel('Harvested energy $\varepsilon(x)$');
+ylabel('SER');
+title('SER versus $\varepsilon(x)$');
+legend({'16-PAM','16-QAM','16-CQAM, $N=4$, max $d_{\min}$',...
+    '16-CQAM, $N=4$, max PAPR','16-sQAM, $i=4$'},'Location','southeast');
 grid on;
 hold off
 

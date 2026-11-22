@@ -1,3 +1,9 @@
+%plot style: all text with the LaTeX interpreter (Computer Modern, as in the report)
+set(groot,'defaultTextInterpreter','latex');
+set(groot,'defaultAxesTickLabelInterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+set(groot,'defaultAxesFontSize',11);
+
 M=16;
 dmin=0.378;
 points_per_axis = sqrt(M);
@@ -26,7 +32,7 @@ grid on;
 axis square;
 xlim([-2 2])
 ylim([-2 2])
-title('16-sQAM, PAPR=3.214, d_{min}=0.378');
+title('16-sQAM, $i=4$, $d_{\min}=0.378$');
 xlabel('In-phase');
 ylabel('Quadrature');
 

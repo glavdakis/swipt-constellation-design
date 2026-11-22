@@ -1,3 +1,9 @@
+%plot style: all text with the LaTeX interpreter (Computer Modern, as in the report)
+set(groot,'defaultTextInterpreter','latex');
+set(groot,'defaultAxesTickLabelInterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+set(groot,'defaultAxesFontSize',11);
+
 M=16;
 Es=1;
 i=linspace(1,M+1,17);
@@ -11,7 +17,7 @@ grid on;
 axis square;
 xlim([-2 2])
 ylim([-2 2])
-title('16-PSK');
+title('16-PSK, $d_{\min}=0.3902$');
 xlabel('In-phase');
 ylabel('Quadrature');
 

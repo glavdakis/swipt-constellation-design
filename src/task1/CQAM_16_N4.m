@@ -1,9 +1,15 @@
+%plot style: all text with the LaTeX interpreter (Computer Modern, as in the report)
+set(groot,'defaultTextInterpreter','latex');
+set(groot,'defaultAxesTickLabelInterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+set(groot,'defaultAxesFontSize',11);
+
 N=4;  
 M=16;
 n=M/N;
 dmin=0.58;
 radii=[dmin/sqrt(2) dmin*((1+sqrt(3))/2) dmin*((sqrt(2)+2)/2) ...
-    4-5.280239*dmin.^2]; 
+    sqrt(4-5.280239*dmin.^2)]; 
 phaseOffsets = [pi/4, 0, pi/4, 0]; 
 cqam_points = [];
 
@@ -19,7 +25,7 @@ figure;
 xlim([-3 3])
 ylim([-3 3])
 grid on;
-title('16-CQAM, N=4, d_{min}=0.58');
+title('16-CQAM, $N=4$, $d_{\min}=0.58$');
 xlabel('In-phase');
 ylabel('Quadrature');
 axis square;
