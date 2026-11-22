@@ -91,22 +91,77 @@ d4I=sqrt((4-5.5*dmin_s^2)/2); %projection of the spiked symbols on the I and Q a
 sqam(corner)=d4I*(sign(real(sqam(corner)))+1j*sign(imag(sqam(corner))));
 SER_sqam=ser_nn(sqam,sigma);
 
+%16-sQAM, i=4, ε(x)=0.2 (union bound on the symbols after harvesting)
+harvest=@(x,e) x.*sqrt(max(abs(x).^2-e,0))./max(abs(x),eps);
+SER_sqam2=ser_nn(harvest(sqam,e_x),sigma);
 
-semilogy(Eb_N0_dB, SER_pam1,'k', Eb_N0_dB, SER_qam1,'b', Eb_N0_dB, SER_cqam1,'r', ...
+figure('Position',[100 100 560 620]);
+hl=semilogy(Eb_N0_dB, SER_pam1,'k', Eb_N0_dB, SER_qam1,'b', Eb_N0_dB, SER_cqam1,'r', ...
     Eb_N0_dB, SER_pam2,'k--',Eb_N0_dB, SER_qam2,'b--', Eb_N0_dB, SER_cqam2,'r--',...
-    Eb_N0_dB, SER_sqam,'g')
+    Eb_N0_dB, SER_sqam,'g', Eb_N0_dB, SER_sqam2,'g--');
+hold on
+
+%% simulation: Monte Carlo with ML detection
+%symbols at the same position are decided as the first of them
+rng(1);
+x_pam=(2*(1:M)'-M-1)*sqrt(Eg);
+[I,Q]=meshgrid((-1.5:1:1.5)*d);
+x_qam=I(:)+1j*Q(:);
+x_cqam=cqam_points(R,phaseOffsets,n);
+sets={x_pam,0,SER_pam1,'k'; harvest(x_pam,e_x),0,SER_pam2,'k';
+    x_qam,1,SER_qam1,'b'; harvest(x_qam,e_x),1,SER_qam2,'b';
+    x_cqam,1,SER_cqam1,'r'; harvest(x_cqam,e_x),1,SER_cqam2,'r';
+    sqam,1,SER_sqam,'g'; harvest(sqam,e_x),1,SER_sqam2,'g'};
+snr_sim=0:2:28;
+for s=1:size(sets,1)
+    ser_sim=nan(size(snr_sim));
+    for k=1:numel(snr_sim)
+        %skip points below the plotted range
+        if interp1(Eb_N0_dB,sets{s,3},snr_sim(k))<3e-6
+            continue
+        end
+        sg=sqrt(1/(4*10^(snr_sim(k)/10))/2);
+        ser_sim(k)=sim_ser(sets{s,1},sg,sets{s,2}==1);
+    end
+    plot(snr_sim,ser_sim,'o','Color',sets{s,4},'MarkerSize',4);
+end
+hs=plot(nan,nan,'ko','MarkerSize',4); %legend entry for the simulation markers
+hold off
+
 xlim([0 28])
 ylim([10^(-6) 1])
 xlabel('$E_{b}/N_{0}$ (dB)');
 ylabel('SER');
 title('SER versus $E_{b}/N_{0}$');
-legend({'16-PAM, $\varepsilon(x)=0$','16-QAM, $\varepsilon(x)=0$',...
+legend([hl; hs],{'16-PAM, $\varepsilon(x)=0$','16-QAM, $\varepsilon(x)=0$',...
     '16-CQAM, $N=4$, $\varepsilon(R_{i})=0$','16-PAM, $\varepsilon(x)=0.2$',...
     '16-QAM, $\varepsilon(x)=0.2$','16-CQAM, $N=4$, $\varepsilon(R_{i})=0.2$',...
-    '16-sQAM, $i=4$, $\varepsilon(x)=0$'},'Location','southwest');
+    '16-sQAM, $i=4$, $\varepsilon(x)=0$','16-sQAM, $i=4$, $\varepsilon(x)=0.2$',...
+    'simulation'},'Location','southoutside','NumColumns',2);
 grid on
 
 %exportgraphics(gcf,'SER_SNR.pdf','ContentType','vector');
+
+function ser=sim_ser(x,sigma,complex_noise)
+%Monte Carlo SER with ML detection: batches of 1e6 symbols until 100 errors
+%or 1e7 symbols. Returns NaN if fewer than 10 errors were counted.
+errors=0;
+total=0;
+while errors<100 && total<1e7
+    tx=randi(numel(x),1e6,1);
+    noise=sigma*randn(1e6,1);
+    if complex_noise
+        noise=noise+1j*sigma*randn(1e6,1);
+    end
+    [~,rx]=min(abs(x(tx)+noise-x.'),[],2);
+    errors=errors+sum(rx~=tx);
+    total=total+1e6;
+end
+ser=errors/total;
+if errors<10
+    ser=NaN;
+end
+end
 
 function points=cqam_points(R,phaseOffsets,n)
 %symbols of a CQAM with radii R and the given phase offset per circle
