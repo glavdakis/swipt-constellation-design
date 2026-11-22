@@ -21,13 +21,13 @@ PAPR_iii=1.8;
 scatter(dmin_iii,PAPR_iii,"filled","m","o")
 
 %16-CQAM, N=4
-dmin_iv=linspace(0,0.60639,200);
-PAPR_iv=4-5.280239*dmin_iv.^2;
+dmin_iv=linspace(0,sqrt(2/(3+sqrt(3))),200);
+PAPR_iv=4-(3.5+sqrt(3))*dmin_iv.^2;
 plot(dmin_iv,PAPR_iv,"r")
 
 %16-CQAM, N=8
-dmin_v=linspace(0,0.40659,200);
-PAPR_v=8-33.446152*dmin_v.^2;
+dmin_v=linspace(0,2/3,200);
+PAPR_v=8-13.25*dmin_v.^2;
 plot(dmin_v,PAPR_v,"c")
 
 xlim([0 0.7])
@@ -40,4 +40,4 @@ legend({'16-PSK','16-PAM','16-QAM','16-CQAM, $N=4$','16-CQAM, $N=8$'},...
 grid on;
 hold off
 
-%saveas(gcf,'PAPR_dmin.pdf');
+%exportgraphics(gcf,'PAPR_dmin.pdf','ContentType','vector');

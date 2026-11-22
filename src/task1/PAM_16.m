@@ -23,4 +23,4 @@ title('16-PAM, $d_{\min}=0.2169$');
 xlabel('In-phase');
 ylabel('Quadrature');
 
-%saveas(gcf, 'PAM_16.pdf');
+%exportgraphics(gcf,'PAM_16.pdf','ContentType','vector');

@@ -8,9 +8,10 @@ N=4;
 M=16;
 n=M/N;
 dmin=0.58;
-radii=[dmin/sqrt(2) dmin*((1+sqrt(3))/2) dmin*((sqrt(2)+2)/2) ...
-    sqrt(4-5.280239*dmin.^2)]; 
-phaseOffsets = [pi/4, 0, pi/4, 0]; 
+%R1, R2 and R3 form equilateral triangles of side dmin (R3 at phase atan(sqrt(3)-1))
+radii=[dmin/sqrt(2) dmin*((1+sqrt(3))/2) dmin*sqrt(2+sqrt(3)/2) ...
+    sqrt(4-(3.5+sqrt(3))*dmin.^2)]; 
+phaseOffsets = [pi/4, 0, atan(sqrt(3)-1), atan(1+2/sqrt(3))]; 
 cqam_points = [];
 
 %print symbols
@@ -46,4 +47,4 @@ viscircles(center, radii(4),'Color','r');
 plot(real(cqam_points), imag(cqam_points), 'o','MarkerFaceColor','b');
 hold off
 
-%saveas(gcf,'CQAM_16_N4.pdf');
+%exportgraphics(gcf,'CQAM_16_N4.pdf','ContentType','vector');

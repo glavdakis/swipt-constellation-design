@@ -23,4 +23,4 @@ title('16-QAM, $d_{\min}=0.6325$');
 xlabel('In-phase');
 ylabel('Quadrature');
 
-%saveas(gcf, 'QAM_16.pdf');
+%exportgraphics(gcf,'QAM_16.pdf','ContentType','vector');

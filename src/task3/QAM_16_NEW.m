@@ -49,4 +49,4 @@ scatter(x,0,'red',"filled")
 plot(real(qam_points), imag(qam_points), 'o','MarkerFaceColor','b');
 hold off
 
-%saveas(gcf,'QAM_16_NEW.pdf');
+%exportgraphics(gcf,'QAM_16_NEW.pdf','ContentType','vector');

@@ -19,11 +19,25 @@ In SWIPT, one signal carries both data and energy. Rectifier circuits are non-li
 
 ## Key findings
 
-- **CQAM** gives a better PAPR/$`d_{min}`$ trade-off than PSK, PAM and QAM. Its number of energy levels lets you choose between energy harvesting and reliability. With N = 4 it reaches $d_{min} = 0.606$, close to the 0.632 of 16-QAM, and its SER without energy harvesting is almost the same as that of 16-QAM.
-- When the same energy ($\varepsilon(x) = 0.2$) is harvested from every symbol, PAM, QAM and CQAM all reach the same error floor, SER = 3/16. Each has 4 symbols with energy of at most 0.2, which collapse to the origin and can no longer be told apart. CQAM's advantage for energy harvesting shows in the SER versus harvested energy analysis: the choice of $d_{min}$ or of maximum PAPR moves its energy levels.
+- **CQAM** gives a better PAPR/$`d_{min}`$ trade-off than PSK, PAM and QAM. Its number of energy levels lets you choose between energy harvesting and reliability. Each circle is placed at the smallest radius that keeps every distance at least $d_{min}$, with its phase chosen to make that radius as small as possible (R1's Algorithm 1). With N = 4 this gives $\text{PAPR} = 4 - (3.5+\sqrt{3})\,d_{min}^2$ up to $d_{min} = 0.650$, above the 0.632 of 16-QAM with almost the same PAPR (1.79 vs 1.8). With N = 8 all symbols lie on a hexagonal lattice and $\text{PAPR} = 8 - 13.25\,d_{min}^2$ up to $d_{min} = 2/3$.
+- When the same energy ($\varepsilon(x) = 0.2$) is harvested from every symbol, PAM and QAM reach the same error floor, SER = 3/16: each has 4 symbols with energy of at most 0.2, which collapse to the origin and can no longer be told apart. CQAM (N = 4) has no error floor, because its inner circle keeps energy 0.211 > 0.2, and reaches SER = 10⁻⁵ at 25.7 dB.
 - **Our proposed constellation** reaches PAPR up to 16, four times CQAM with N = 4, following $\text{PAPR} = 16 - 46.32\,d_{min}^2$ for $d_{min} \le 0.533$. It offers 5 energy levels for fine control of the harvested energy.
 
 All derivations and discussion are in the full report: [`docs/report.pdf`](docs/report.pdf).
+
+## Corrections to the reference papers
+
+Where a result in [R1] or [R2] is not correct, the report points it out and the plots use the correct curve.
+
+- **[R1], Fig. 2 (PAPR vs. $d_{min}$):** the CQAM curves are not the maximum PAPR that Algorithm 1 allows. With the phase of each circle chosen to minimise its radius, N = 4 reaches $d_{min} = 0.650$ (R1 stops at about 0.6), and N = 8 reaches $d_{min} = 2/3$ with PAPR 6.81 at $d_{min} = 0.3$ (R1: about 6, stopping at about 0.45). A numerical search over all radii and phases found no better placement.
+- **[R1], Fig. 4 (SER vs. harvested energy):**
+  - The 16-QAM curve jumps straight to 0.75 at $\varepsilon(x) \approx 0.2$. Only the 4 inner symbols are lost there; the jump to 0.75 belongs at $\varepsilon(x) = 1$.
+  - The energy levels of the CQAM (max $d_{min}$) curve add up to about 5.2 instead of 4, so they do not belong to a constellation with unit average energy.
+  - It counts all $k$ symbols that collapse to the origin as errors. An ML detector still decides correctly for one of them, so the SER is $(k-1)/M$.
+- **[R1], eq. (4):** it only uses the distance between symbols on the same circle, while the nearest neighbours are often on another circle. The report uses the union bound over the actual distances.
+- **[R2], eq. (7):** it treats the 12 inner sQAM symbols as a full 16-QAM scaled to their mean energy, giving a minimum distance of 0.324 instead of the actual 0.378. It overestimates the SER (4.1·10⁻³ instead of 6.9·10⁻⁴ at 16 dB). The report plots the union bound on the actual constellation.
+
+The union-bound and decision-region curves were checked against Monte Carlo simulation with an ML detector.
 
 ## Repository structure
 

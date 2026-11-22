@@ -12,13 +12,13 @@ plot(dmin_i,PAPR_i,"g")
 hold on
 
 %16-CQAM, N=4
-dmin_ii=linspace(0,0.60639,200);
-PAPR_ii=4-5.280239*dmin_ii.^2;
+dmin_ii=linspace(0,sqrt(2/(3+sqrt(3))),200);
+PAPR_ii=4-(3.5+sqrt(3))*dmin_ii.^2;
 plot(dmin_ii,PAPR_ii,"r")
 
 %16-CQAM, N=8
-dmin_iii=linspace(0,0.40659,200);
-PAPR_iii=8-33.446152*dmin_iii.^2;
+dmin_iii=linspace(0,2/3,200);
+PAPR_iii=8-13.25*dmin_iii.^2;
 plot(dmin_iii,PAPR_iii,"c")
 
 %16-sQAM, 4 symbols spike
@@ -42,4 +42,4 @@ legend({'Proposed 16-QAM, $N=5$','16-CQAM, $N=4$','16-CQAM, $N=8$',...
 grid on;
 hold off
    
-%saveas(gcf,'PAPR_dmin_NEW.pdf');
+%exportgraphics(gcf,'PAPR_dmin_NEW.pdf','ContentType','vector');

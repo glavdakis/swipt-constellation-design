@@ -36,4 +36,4 @@ title('16-sQAM, $i=4$, $d_{\min}=0.378$');
 xlabel('In-phase');
 ylabel('Quadrature');
 
-%saveas(gcf, 'sQAM_16.pdf');
+%exportgraphics(gcf,'sQAM_16.pdf','ContentType','vector');

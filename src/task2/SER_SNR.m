@@ -55,10 +55,10 @@ SER_qam2=(1/16)*(4*pe1+8*pe2+4*pe0);
 %16-CQAM, N=4, max dmin
 N=4;
 n=M/N;
-dmin=0.60639;
-R=[dmin/sqrt(2) dmin*((1+sqrt(3))/2) dmin*((2+sqrt(2))/2) ...
-    sqrt(4-5.280239*dmin^2)];
-phaseOffsets=[pi/4, 0, pi/4, 0];
+dmin=0.65012;
+R=[dmin/sqrt(2) dmin*((1+sqrt(3))/2) dmin*sqrt(2+sqrt(3)/2) ...
+    sqrt(4-(3.5+sqrt(3))*dmin^2)];
+phaseOffsets=[pi/4, 0, atan(sqrt(3)-1), atan(1+2/sqrt(3))];
 
 %16-CQAM, ε(Ri)=0
 SER_cqam1=ser_nn(cqam_points(R,phaseOffsets,n),sigma);
@@ -78,7 +78,18 @@ pmax=qfunc((sqrt(PAPR)-Dmid)./sqrt(2*N0)); %SER of spiked symbols
 p=2*(1-1/(sqrt(M)))*2*qfunc(k*sqrt(4*Eb_N0.*g*2))...
     -(1-2/(sqrt(M))+1/M)*(2*qfunc(k*sqrt(4*Eb_N0.*g*2))).^2; %SER of 16-RQAM
 
-SER_sqam=((M-i)/M)*p+(i/M)*pmax;
+SER_sqam_R2=((M-i)/M)*p+(i/M)*pmax; %approximation (7) of [R2], not plotted
+
+%[R2] treats the 12 inner symbols as a full 16-QAM scaled by sqrt(γ)
+%(dmin=2k*sqrt(γ)=0.324 instead of the actual 0.378), so (7) overestimates
+%the SER. The plotted curve is the union bound on the actual constellation.
+dmin_s=0.378;
+[I,Q]=meshgrid((-1.5:1:1.5)*dmin_s);
+sqam=I(:)+1j*Q(:);
+corner=abs(abs(real(sqam))-1.5*dmin_s)<1e-9 & abs(abs(imag(sqam))-1.5*dmin_s)<1e-9;
+d4I=sqrt((4-5.5*dmin_s^2)/2); %projection of the spiked symbols on the I and Q axes
+sqam(corner)=d4I*(sign(real(sqam(corner)))+1j*sign(imag(sqam(corner))));
+SER_sqam=ser_nn(sqam,sigma);
 
 
 semilogy(Eb_N0_dB, SER_pam1,'k', Eb_N0_dB, SER_qam1,'b', Eb_N0_dB, SER_cqam1,'r', ...
@@ -95,7 +106,7 @@ legend({'16-PAM, $\varepsilon(x)=0$','16-QAM, $\varepsilon(x)=0$',...
     '16-sQAM, $i=4$, $\varepsilon(x)=0$'},'Location','southwest');
 grid on
 
-%saveas(gcf,'SER_SNR.pdf')
+%exportgraphics(gcf,'SER_SNR.pdf','ContentType','vector');
 
 function points=cqam_points(R,phaseOffsets,n)
 %symbols of a CQAM with radii R and the given phase offset per circle

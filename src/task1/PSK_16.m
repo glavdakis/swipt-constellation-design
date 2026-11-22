@@ -21,4 +21,4 @@ title('16-PSK, $d_{\min}=0.3902$');
 xlabel('In-phase');
 ylabel('Quadrature');
 
-%saveas(gcf,'PSK_16.pdf');
+%exportgraphics(gcf,'PSK_16.pdf','ContentType','vector');

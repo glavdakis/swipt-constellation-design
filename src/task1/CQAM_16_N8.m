@@ -8,9 +8,11 @@ N=8;
 M=16;
 n=M/N;
 dmin=0.405;
-radii=[dmin/2 sqrt(3)*dmin/2 3*dmin/2 ((sqrt(3)/2)+1)*dmin 5*dmin/2 ...
-    ((sqrt(3)/2)+2)*dmin 7*dmin/2 sqrt(8-33.446152*dmin.^2)]; 
-phaseOffsets = [pi/2, 0, pi/2, 0, pi/2, 0, pi/2, 0]; 
+%all symbols on the hexagonal lattice with spacing dmin [R3]
+radii=[dmin/2 sqrt(3)*dmin/2 sqrt(7)*dmin/2 sqrt(7)*dmin/2 3*dmin/2 ...
+    sqrt(13)*dmin/2 sqrt(13)*dmin/2 sqrt(8-13.25*dmin.^2)]; 
+phaseOffsets = [pi/2, 0, atan(2/sqrt(3)), pi-atan(2/sqrt(3)), pi/2, ...
+    atan(1/(2*sqrt(3))), pi-atan(1/(2*sqrt(3))), atan(4/sqrt(3))]; 
 cqam_points = [];
 
 %print symbols
@@ -47,4 +49,4 @@ viscircles(center, radii(8),'Color','r');
 plot(real(cqam_points), imag(cqam_points), 'o','MarkerFaceColor','b');
 hold off
 
-%saveas(gcf, 'CQAM_16_N8.pdf');
+%exportgraphics(gcf,'CQAM_16_N8.pdf','ContentType','vector');
