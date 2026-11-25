@@ -14,7 +14,7 @@ i=I(:);
 q=Q(:);
 
 figure;
-plot(i,q,'o','Color',[0 0.447 0.741]);
+plot(i,q,'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
 grid on;
 axis square;
 xlim([-2 2])

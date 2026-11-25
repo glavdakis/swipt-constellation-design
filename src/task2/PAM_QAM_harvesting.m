@@ -23,8 +23,8 @@ for b=bounds
     plot([b b],[-0.12 0.12],'Color',[0 0.5 0],'LineWidth',1.2);
 end
 zero=abs(s)<1e-12;
-plot(s(~zero),zeros(1,sum(~zero)),'o','Color',[0 0.447 0.741]);
-plot(0,0,'o','Color',[0 0.447 0.741]);
+plot(s(~zero),zeros(1,sum(~zero)),'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
+plot(0,0,'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
 for i=find(~zero)
     if mod(i,2)==1
         y=0.07;
@@ -56,8 +56,8 @@ hold on
 [vx,vy]=voronoi(real(pts),imag(pts)); %ML decision boundaries
 plot(vx,vy,'Color',[0 0.5 0],'LineWidth',1.2);
 outer=pts(abs(pts)>1e-12);
-plot(real(outer),imag(outer),'o','Color',[0 0.447 0.741]);
-plot(0,0,'o','Color',[0 0.447 0.741]);
+plot(real(outer),imag(outer),'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
+plot(0,0,'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
 
 %labels as in the text: a, b, c, d for the 1st, 2nd, 3rd, 4th quadrant
 quad='abcd';

@@ -11,7 +11,7 @@ x=(2*i-M-1)*sqrt(Eg);
 y=zeros(size(x));
 
 figure;
-plot(x,y,'o','Color',[0 0.447 0.741]);
+plot(x,y,'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
 axis square;
 grid on;
 xlim([-2 2])

@@ -39,7 +39,7 @@ for i = 1:N-1
     plot(radii(i)*cos(t), radii(i)*sin(t), 'Color', blue);
 end
 plot(radii(N)*cos(t), radii(N)*sin(t), 'r');
-plot(real(cqam_points), imag(cqam_points), 'o', 'Color', blue);
+plot(real(cqam_points), imag(cqam_points), 'o', 'Color', blue, 'MarkerFaceColor', blue);
 hold off
 
 %exportgraphics(gcf,'CQAM_16_N4.pdf','ContentType','vector');

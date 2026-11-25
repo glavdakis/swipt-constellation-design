@@ -16,7 +16,7 @@ hold on
 %the only energy level (also the outer one): red circle, as in [R1]
 t=linspace(0,2*pi,400);
 plot(sqrt(Es)*cos(t),sqrt(Es)*sin(t),'r');
-plot(I,Q,'o','Color',[0 0.447 0.741]);
+plot(I,Q,'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
 hold off
 grid on;
 axis square;

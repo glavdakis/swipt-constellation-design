@@ -31,7 +31,7 @@ blue=[0 0.447 0.741]; %MATLAB default blue, as in [R1]
 t=linspace(0,2*pi,400);
 hold on
 plot(rs*cos(t), rs*sin(t), 'r'); %energy level of the spike
-plot(real(points), imag(points), 'o', 'Color', blue);
+plot(real(points), imag(points), 'o', 'Color', blue, 'MarkerFaceColor', blue);
 hold off
 grid on;
 axis square;

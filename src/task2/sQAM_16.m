@@ -27,7 +27,7 @@ q(13)=(-1.2677);
 q(16)=(+1.2677);
 
 figure;
-plot(i,q,'o','Color',[0 0.447 0.741]);
+plot(i,q,'o','Color',[0 0.447 0.741],'MarkerFaceColor',[0 0.447 0.741]);
 grid on;
 axis square;
 xlim([-2 2])
