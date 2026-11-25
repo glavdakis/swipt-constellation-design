@@ -21,7 +21,7 @@ d=sqrt(2/5);
 E_qam=[repmat(d^2/2,1,4), repmat(5*d^2/2,1,8), repmat(9*d^2/2,1,4)];
 
 %16-CQAM, N=4, max dmin
-dmin_i=0.65012;
+dmin_i=sqrt(2/(3+sqrt(3))); %max dmin of 16-CQAM, N=4 (0.6501)
 R=[dmin_i/sqrt(2) dmin_i*((1+sqrt(3))/2) dmin_i*sqrt(2+sqrt(3)/2) ...
     sqrt(4-(3.5+sqrt(3))*dmin_i^2)];
 E_cqam_dmin=repelem(R.^2,4);

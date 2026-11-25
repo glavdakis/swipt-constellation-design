@@ -7,7 +7,7 @@ set(groot,'defaultAxesFontSize',11);
 N=4;  
 M=16;
 n=M/N;
-dmin=0.65012;
+dmin=sqrt(2/(3+sqrt(3))); %max dmin of 16-CQAM, N=4 (0.6501)
 %R1, R2 and R3 form equilateral triangles of side dmin (R3 at phase atan(sqrt(3)-1))
 radii=[dmin/sqrt(2) dmin*((1+sqrt(3))/2) dmin*sqrt(2+sqrt(3)/2) ...
     sqrt(4-(3.5+sqrt(3))*dmin.^2)]; 

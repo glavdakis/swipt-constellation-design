@@ -55,7 +55,7 @@ SER_qam2=(1/16)*(4*pe1+8*pe2+4*pe0);
 %16-CQAM, N=4, max dmin
 N=4;
 n=M/N;
-dmin=0.65012;
+dmin=sqrt(2/(3+sqrt(3))); %max dmin of 16-CQAM, N=4 (0.6501)
 R=[dmin/sqrt(2) dmin*((1+sqrt(3))/2) dmin*sqrt(2+sqrt(3)/2) ...
     sqrt(4-(3.5+sqrt(3))*dmin^2)];
 phaseOffsets=[pi/4, 0, atan(sqrt(3)-1), atan(1+2/sqrt(3))];

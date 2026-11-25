@@ -22,7 +22,7 @@ x_prop1=prop_points(15/(4*sqrt(31)));
 x_prop2=prop_points(sqrt((16-3.214)/(464/15)));
 
 %16-CQAM, N=4, max dmin
-dmin_c=0.65012;
+dmin_c=sqrt(2/(3+sqrt(3))); %max dmin of 16-CQAM, N=4 (0.6501)
 R=[dmin_c/sqrt(2) dmin_c*((1+sqrt(3))/2) dmin_c*sqrt(2+sqrt(3)/2) ...
     sqrt(4-(3.5+sqrt(3))*dmin_c^2)];
 ph=[pi/4, 0, atan(sqrt(3)-1), atan(1+2/sqrt(3))];
